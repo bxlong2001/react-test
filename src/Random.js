@@ -26,7 +26,7 @@ function Random( { words } ) {
                     <h1 >{words[indexRandom].word}</h1>
                     <input
                         style={{
-                            maxWidth: 100,
+                            maxWidth: 200,
                             textAlign: "center"
                         }}
                         onChange={handleSubmit}
