@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Show from "./Show";
 import Test from "./Test";
 
@@ -9,6 +9,7 @@ function App() {
   const [show, setShow] = useState(false)
   const [word, setWord] = useState('');
   const [mean, setMean] = useState('');
+  const inputWord = useRef()
   const [words, setWords] = useState(() => {
     const storageWords = JSON.parse(localStorage.getItem("words"));
     return storageWords ?? [];
@@ -42,6 +43,7 @@ function App() {
 
     setWord('')
     setMean('')
+    inputWord.current.focus()
   };
 
   const handleSearch = () => {
@@ -53,7 +55,7 @@ function App() {
   }
 
   return (
-    <div classword="App" style={{marginTop: 140}}>
+    <div classword="App" style={{marginTop: 100}}>
       <div class="text text-1">ひ</div>
       <div class="text text-2">ら</div>
       <div class="text text-3">が</div>
@@ -61,6 +63,7 @@ function App() {
       <div>
         <label>Japanese: </label>
         <input 
+          ref={inputWord}
           placeholder="Input word..." 
           value={word}
           onChange={(e) => {setWord(e.target.value)}}
@@ -73,6 +76,7 @@ function App() {
           placeholder="Input mean..."
           value={mean}
           onChange={(e) => setMean(e.target.value)}
+          onKeyDown={e => (e.key==="Enter" && handleAdd())}
         />
       </div>
       <div style={{ marginTop: 10 }}>

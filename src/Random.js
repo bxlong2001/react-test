@@ -23,10 +23,10 @@ function Random( { words } ) {
             {/* <button onClick={handleRandom}>Random</button> */}
             {Number.isInteger(indexRandom) && (
                 <>
-                    <h1 >{words[indexRandom].word}</h1>
+                    <h1 className="word_random">{words[indexRandom].word}</h1>
                     <input
                         style={{
-                            maxWidth: 200,
+                            maxWidth: 250,
                             textAlign: "center"
                         }}
                         onChange={handleSubmit}
