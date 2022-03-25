@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import Random from './Random'
 import Countdown from './Countdown'
 
@@ -10,4 +11,4 @@ function Test({words}) {
     )
 }
 
-export default Test
+export default memo(Test)

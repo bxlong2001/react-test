@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {memo, useEffect, useState} from 'react'
 
 
 function Countdown() {
@@ -25,4 +25,4 @@ function Countdown() {
     )
 }
 
-export default Countdown
+export default memo(Countdown)

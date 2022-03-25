@@ -1,13 +1,19 @@
-import { useState } from "react"
+import { useState, memo, useRef } from "react"
 
-function Random( { words } ) {
-    const [indexRandom, setIndexRandom] = useState(Math.floor(Math.random() * words.length))
+function Random( {words} ) {
     const [result, setResult] = useState()
-    console.log(result);
+    const [newWords, setNewWords] = useState([...words])
 
-    const handleRandom = (e) => {
+    const indexRandom = useRef()
+
+    const handleRandom = e => {
         e.target.value = null
-        setIndexRandom(Math.floor(Math.random() * words.length))
+        newWords.length === 1 && setNewWords([...words])
+        setNewWords(prev => {
+            prev.splice(indexRandom.current,1)
+            indexRandom.current = Math.floor(Math.random() * newWords.length)
+            return [...prev]
+        })
     }
 
     const handleSubmit = (e) => {
@@ -15,15 +21,15 @@ function Random( { words } ) {
     }
 
     const handleKeyDown = (e) => {
-        e.key==="Enter" && result === words[indexRandom].mean && handleRandom(e)
+        e.key==="Enter" && result === newWords[indexRandom.current].mean && handleRandom(e)
     }
 
     return (
         <div id="random">
-            {/* <button onClick={handleRandom}>Random</button> */}
-            {Number.isInteger(indexRandom) && (
+            <button onClick={handleRandom}>Random</button>
+            {Number.isInteger(indexRandom.current) && (
                 <>
-                    <h1 className="word_random">{words[indexRandom].word}</h1>
+                    <h1 className="word_random">{newWords[indexRandom.current].word}</h1>
                     <input
                         style={{
                             maxWidth: 250,
@@ -38,4 +44,4 @@ function Random( { words } ) {
     )
 }
 
-export default Random
+export default memo(Random)
