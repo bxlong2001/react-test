@@ -1,6 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import styles from './App.module.css'
+import clsx from 'clsx'
 import Show from "./Show";
 import Test from "./Test";
+import { useState, useEffect, useRef, createContext } from "react";
+export const WordsContext = createContext()
 
 function App() {
   // localStorage.removeItem("word")
@@ -55,53 +58,81 @@ function App() {
   }
 
   return (
-    <div classword="App" style={{marginTop: 100}}>
-      <div class="text text-1">ひ</div>
-      <div class="text text-2">ら</div>
-      <div class="text text-3">が</div>
-      <div class="text text-4">な</div>
-      <div>
-        <label>Japanese: </label>
-        <input 
-          ref={inputWord}
-          placeholder="Input word..." 
-          value={word}
-          onChange={(e) => {setWord(e.target.value)}}
-        />
-      </div>
+    <WordsContext.Provider value={words}>
+      <div id="app" style={{marginTop: 100}}>
+        <div class="text text-1">ひ</div>
+        <div class="text text-2">ら</div>
+        <div class="text text-3">が</div>
+        <div class="text text-4">な</div>
+        <div>
+          <label>Japanese: </label>
+          <input 
+            ref={inputWord}
+            placeholder="Input word..." 
+            value={word}
+            onChange={(e) => {setWord(e.target.value)}}
+          />
+        </div>
 
-      <div style={{marginTop: 5}}>
-        <label>Vietnamese: </label>
-        <input
-          placeholder="Input mean..."
-          value={mean}
-          onChange={(e) => setMean(e.target.value)}
-          onKeyDown={e => (e.key==="Enter" && handleAdd())}
-        />
-      </div>
-      <div style={{ marginTop: 10 }}>
-        <button onClick={handleAdd}>Add</button>
-        <button style={{ marginLeft: 5 }} onClick={() => {setShow(!show); setShowTest(false)}}>List</button>
-        <button style={{ marginLeft: 5 }} onClick={handleSearch}>Search</button>
-        <button style={{ marginLeft: 5 }} onClick={() => {setShowTest(!showTest); setShow(false)}}>Test</button>
-        
-      </div>
-      {show && <Show words={words}/>}
-      {showTop && (
-        <button
-          style={{
-            position: 'fixed',
-            right: 20,
-            bottom: 20,
-          }}
+        <div style={{marginTop: 5}}>
+          <label>Vietnamese: </label>
+          <input
+            placeholder="Input mean..."
+            value={mean}
+            onChange={(e) => setMean(e.target.value)}
+            onKeyDown={e => (e.key==="Enter" && handleAdd())}
+          />
+        </div>
+        <div>
+          <button
+            className={clsx(styles.btn)}
+            onClick={handleAdd}
+          >
+            Add
+          </button>
+          <button 
+            className={clsx(styles.btn, {
+              [styles.active]: show
+            })} 
+            onClick={() => {setShow(!show); setShowTest(false)}}
+          >
+            List
+          </button>
+          <button
+            className={clsx(styles.btn)}
+            onClick={handleSearch}
+          >
+            Search
+          </button>
+          <button 
+            className={clsx(styles.btn, {
+              [styles.active]: showTest
+            })}
+            onClick={() => {setShowTest(!showTest); setShow(false)}}
+          >
+            テスト
+          </button>
+        </div>
 
-          onClick={() => window.scrollTo( {left: 0, top: 0, behavior: 'smooth'})}
-        >
-          うえ
-        </button>
-      )}
-      {showTest && <Test words={words}/>}
-    </div>
+        {show && <Show words={words}/>}
+        {showTest && <Test/>}
+
+      </div>
+        {/* Show scroll top     */}
+        {showTop && (
+          <button
+            style={{
+              position: 'fixed',
+              right: 20,
+              bottom: 20,
+            }}
+
+            onClick={() => window.scrollTo( {left: 0, top: 0, behavior: 'smooth'})}
+          >
+            うえ
+          </button>
+        )}
+    </WordsContext.Provider>
   );
 }
 

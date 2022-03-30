@@ -1,17 +1,30 @@
-import { useState, memo, useRef } from "react"
-
-function Random( {words} ) {
+import { useState, memo, useRef, useContext } from "react"
+import { WordsContext } from "./App"
+function Random() {
+    const words = useContext(WordsContext)
+    // const words = useRef([{"word":"あ","mean":"a"},{"word":"い","mean":"i"},{"word":"う","mean":"u"},{"word":"え","mean":"e"}])
     const [result, setResult] = useState()
     const [newWords, setNewWords] = useState([...words])
-
-    const indexRandom = useRef()
+    const indexRandom = useRef(Math.floor(Math.random() * newWords.length))
+    // console.log("ngoai", newWords);
+    // console.log("ngoai", indexRandom.current);
 
     const handleRandom = e => {
+        // console.log(newWords);
+        // console.log(words.current);
+        // console.log("trong",indexRandom.current);
         e.target.value = null
-        newWords.length === 1 && setNewWords([...words])
+        // newWords.length === 1 && setNewWords([...words])
         setNewWords(prev => {
-            prev.splice(indexRandom.current,1)
+            console.log("before: ",prev);
+            if(prev.length === 0) {
+                prev = [...words]
+                console.log("add");
+            }else {
+                prev.splice(indexRandom.current,1)
+            }
             indexRandom.current = Math.floor(Math.random() * newWords.length)
+            console.log("after: ",prev);
             return [...prev]
         })
     }
@@ -26,7 +39,7 @@ function Random( {words} ) {
 
     return (
         <div id="random">
-            <button onClick={handleRandom}>Random</button>
+            {/* <button onClick={handleRandom}>Random</button> */}
             {Number.isInteger(indexRandom.current) && (
                 <>
                     <h1 className="word_random">{newWords[indexRandom.current].word}</h1>

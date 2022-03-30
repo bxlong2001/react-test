@@ -17,8 +17,13 @@ body {
   text-align: center
 }
 
+#root {
+  max-width: 430px;
+  margin: auto;
+}
+
 .text {
-    height: 200px;
+    height: 170px;
     display: inline-block;
     font-size: 100px;
     /* line-height: 84%; */
@@ -47,24 +52,13 @@ body {
 }
 
 label {
-  color: aqua;
+  color: rgb(252, 120, 190);
   font-weight: 600;
+  display: flex;
+
 }
 .word_random {
   font-size: 50px;
-}
-
-button {
-  width: 100px;
-  height: 30px;
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  border-radius: 8px;
-}
-
-button:hover {
-  cursor: pointer;
 }
 
 #ul-list {
@@ -80,16 +74,19 @@ button:hover {
 }
 
 label {
+  margin-left: 10px;
   font-size: 26px;
 }
 
 input {
+  margin-top: 5px;
   font-size: 18px;
   line-height: 40px;
   border-radius: 10px;
   height: 40px;
-  width: 250px;
+  width: 416px;
   padding: 5px;
+  padding-left: 10px;
 }
 
 /* 

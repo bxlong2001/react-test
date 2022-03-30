@@ -2,11 +2,11 @@ import { memo } from 'react'
 import Random from './Random'
 import Countdown from './Countdown'
 
-function Test({words}) {
+function Test() {
     return (
         <>
             <Countdown />
-            <Random words={words}/>
+            <Random/>
         </>
     )
 }
