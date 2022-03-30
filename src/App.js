@@ -85,13 +85,13 @@ function App() {
         </div>
         <div>
           <button
-            className={clsx(styles.btn)}
+            className={clsx('btn')}
             onClick={handleAdd}
           >
             Add
           </button>
           <button 
-            className={clsx(styles.btn, {
+            className={clsx('btn', {
               [styles.active]: show
             })} 
             onClick={() => {setShow(!show); setShowTest(false)}}
@@ -99,13 +99,13 @@ function App() {
             List
           </button>
           <button
-            className={clsx(styles.btn)}
+            className={clsx('btn')}
             onClick={handleSearch}
           >
             Search
           </button>
           <button 
-            className={clsx(styles.btn, {
+            className={clsx('btn', {
               [styles.active]: showTest
             })}
             onClick={() => {setShowTest(!showTest); setShow(false)}}

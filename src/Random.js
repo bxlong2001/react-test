@@ -1,30 +1,36 @@
 import { useState, memo, useRef, useContext } from "react"
 import { WordsContext } from "./App"
+
+
 function Random() {
     const words = useContext(WordsContext)
+    const btn_none = useRef()
     // const words = useRef([{"word":"あ","mean":"a"},{"word":"い","mean":"i"},{"word":"う","mean":"u"},{"word":"え","mean":"e"}])
     const [result, setResult] = useState()
-    const [newWords, setNewWords] = useState([...words])
-    const indexRandom = useRef(Math.floor(Math.random() * newWords.length))
+    const [newWords, setNewWords] = useState([])
+    const indexRandom = useRef()
     // console.log("ngoai", newWords);
-    // console.log("ngoai", indexRandom.current);
+    console.log("ngoai", indexRandom.current);
 
     const handleRandom = e => {
+        btn_none.current.style.display = "none"
         // console.log(newWords);
         // console.log(words.current);
-        // console.log("trong",indexRandom.current);
+        console.log("trong",indexRandom.current);
         e.target.value = null
         // newWords.length === 1 && setNewWords([...words])
         setNewWords(prev => {
-            console.log("before: ",prev);
-            if(prev.length === 0) {
+            // console.log("before: ",prev);
+            // console.log("before: ",indexRandom.current);
+            if(prev.length <= 1) {
                 prev = [...words]
                 console.log("add");
             }else {
-                prev.splice(indexRandom.current,1)
+                Number.isInteger(indexRandom.current) && prev.splice(indexRandom.current,1)
             }
-            indexRandom.current = Math.floor(Math.random() * newWords.length)
-            console.log("after: ",prev);
+            indexRandom.current = Math.floor(Math.random() * prev.length)
+            // console.log("after: ",prev);
+            // console.log("after: ",indexRandom.current);
             return [...prev]
         })
     }
@@ -39,7 +45,7 @@ function Random() {
 
     return (
         <div id="random">
-            {/* <button onClick={handleRandom}>Random</button> */}
+            <button className="btn" style={{ width: 100, height: 30}} ref={btn_none} onClick={handleRandom}>Random</button>
             {Number.isInteger(indexRandom.current) && (
                 <>
                     <h1 className="word_random">{newWords[indexRandom.current].word}</h1>
