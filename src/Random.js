@@ -23,8 +23,8 @@ function Random() {
             // console.log("before: ",prev);
             // console.log("before: ",indexRandom.current);
             if(prev.length <= 1) {
+                prev.length === 1 ? alert('Done!') : alert('Start!')
                 prev = [...words]
-                console.log("add");
             }else {
                 Number.isInteger(indexRandom.current) && prev.splice(indexRandom.current,1)
             }
