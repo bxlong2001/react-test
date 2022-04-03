@@ -65,7 +65,7 @@ function App() {
         <div class="text text-3">が</div>
         <div class="text text-4">な</div>
         <div>
-          <label>Japanese: </label>
+          <label>にほんご: </label>
           <input 
             ref={inputWord}
             placeholder="Input word..." 
@@ -75,7 +75,7 @@ function App() {
         </div>
 
         <div style={{marginTop: 5}}>
-          <label>Vietnamese: </label>
+          <label>ベトナムご: </label>
           <input
             placeholder="Input mean..."
             value={mean}
