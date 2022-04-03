@@ -5,6 +5,7 @@ import { WordsContext } from "./App"
 function Random() {
     const words = useContext(WordsContext)
     const btn_none = useRef()
+    const flag = useRef()
     // const words = useRef([{"word":"あ","mean":"a"},{"word":"い","mean":"i"},{"word":"う","mean":"u"},{"word":"え","mean":"e"}])
     const [result, setResult] = useState()
     const [newWords, setNewWords] = useState([])
@@ -31,6 +32,7 @@ function Random() {
             indexRandom.current = Math.floor(Math.random() * prev.length)
             // console.log("after: ",prev);
             // console.log("after: ",indexRandom.current);
+            flag.current = Math.random() < 0.5
             return [...prev]
         })
     }
@@ -40,7 +42,11 @@ function Random() {
     }
 
     const handleKeyDown = (e) => {
-        e.key==="Enter" && result === newWords[indexRandom.current].mean && handleRandom(e)
+        if(e.key==="Enter") {
+            if((result === newWords[indexRandom.current].mean) || (result === newWords[indexRandom.current].word)) {
+                handleRandom(e)
+            }
+        }
     }
 
     return (
@@ -48,7 +54,7 @@ function Random() {
             <button className="btn" style={{ width: 100, height: 30}} ref={btn_none} onClick={handleRandom}>Random</button>
             {Number.isInteger(indexRandom.current) && (
                 <>
-                    <h1 className="word_random">{newWords[indexRandom.current].word}</h1>
+                    <h1 className="word_random">{flag.current ? newWords[indexRandom.current].word : newWords[indexRandom.current].mean}</h1>
                     <input
                         style={{
                             maxWidth: 250,
