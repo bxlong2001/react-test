@@ -60,12 +60,11 @@ function App() {
   return (
     <WordsContext.Provider value={words}>
       <div id="app" style={{marginTop: 100}}>
-        <div class="text text-1">ひ</div>
-        <div class="text text-2">ら</div>
-        <div class="text text-3">が</div>
-        <div class="text text-4">な</div>
+        <div class="text text-1">日</div>
+        <div class="text text-2">本</div>
+        <div class="text text-3">語</div>
         <div>
-          <label>にほんご: </label>
+          <label>日本語: </label>
           <input 
             ref={inputWord}
             placeholder="Input word..." 
@@ -75,7 +74,7 @@ function App() {
         </div>
 
         <div style={{marginTop: 5}}>
-          <label>ベトナムご: </label>
+          <label>ベトナム語: </label>
           <input
             placeholder="Input mean..."
             value={mean}
