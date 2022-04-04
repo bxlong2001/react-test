@@ -78,15 +78,21 @@ label {
 }
 
 #ul-list {
-  max-width: 280px;
   list-style: none;
+  max-width: 414px;
   font-size: 20px;
   font-weight: 600;
-  background-color: antiquewhite;
+  background-color: #fff;
   padding: 0;
   margin: auto;
   color: black;
   border-radius: 5px;
+}
+
+.list {
+  text-align: start;
+  padding: 10px 20px;
+  border-bottom: 1px solid #333;
 }
 
 label {
