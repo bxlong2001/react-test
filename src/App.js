@@ -54,7 +54,9 @@ function App() {
     // console.log(newWordsSort);
     // console.log(newWordsSort.sort());
     const resultWord = words.find((findWord) => word === findWord.word);
-    setMean(resultWord.mean)
+    word && setMean(resultWord.mean)
+    const resultMean = words.find((findMean) => mean === findMean.mean);
+    mean && setWord(resultMean.word)
   }
 
   return (
@@ -69,7 +71,7 @@ function App() {
             ref={inputWord}
             placeholder="Input word..." 
             value={word}
-            onChange={(e) => {setWord(e.target.value)}}
+            onChange={(e) => setWord(e.target.value)}
           />
         </div>
 
